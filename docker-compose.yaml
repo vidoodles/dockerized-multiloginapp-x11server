@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  x11server:
+    image: dorowu/ubuntu-desktop-lxde-vnc:focal
+    ports:
+      - "6080:80"
+    container_name: vbp-x11server
+    environment:
+      - DISPLAY=:1
+    volumes: 
+      - /dev/shm:/dev/shm
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - x11_socket:/tmp/.X11-unix
+      - xauth:/tmp/.X11-unix/Xauthority
+    privileged: true
+    networks:
+      - multilogin_xserver
+
+  multilogin:
+    build:
+      context: .
+      dockerfile: ./multilogin/Dockerfile
+    container_name: multilogin
+    environment:
+      - DISPLAY=:1
+      - XAUTHORITY=/tmp/.X11-unix/Xauthority
+      - MULTILOGIN_USER=<MULTILOGINAPP USERNAME>
+      - MULTILOGIN_PASSWORD=<MULTILOGINAPP PASSWORD>
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - x11_socket:/tmp/.X11-unix
+      - /dev/shm:/dev/shm
+      - xauth:/tmp/.X11-unix/Xauthority
+    image: multilogin
+    privileged: true
+    ports:
+      - "3500:3500"
+    depends_on:
+      - x11server
+    networks:
+      - multilogin_xserver
+
+networks:
+  multilogin_xserver:
+
+volumes:
+  x11_socket:
+  xauth:

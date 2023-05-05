@@ -5,7 +5,7 @@ services:
     image: dorowu/ubuntu-desktop-lxde-vnc:focal
     ports:
       - "6080:80"
-    container_name: vbp-x11server
+    container_name: x11server
     environment:
       - DISPLAY=:1
     volumes: 

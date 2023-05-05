@@ -55,6 +55,18 @@ Contributions to this project are welcome. To get started, follow these steps:
 
 5. Create a pull request on the original repository.
 
+## Docker Compose Configuration
+The docker-compose.yml file defines two services:
+
+* x11server: This service provides the X11server environment that the multilogin app container connects to. It uses the dorowu/ubuntu-desktop-lxde-vnc:focal Docker image and exposes port 6080.
+
+* multilogin: This service builds a Docker image from the Dockerfile in the ./multilogin directory and runs the multilogin app container. It depends on the x11server service and exposes port 3500. The environment variables for the multilogin app are defined in the environment section.
+The docker-compose.yml file also defines two volumes:
+
+# Volumes 
+* x11_socket: This volume is used to share the X11 socket between the x11server and multilogin services.
+* xauth: This volume is used to store the Xauthority file, which is used for X11 authentication.
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE.md](LICENSE.md) file for details.

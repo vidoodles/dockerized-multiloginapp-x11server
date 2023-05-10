@@ -1,3 +1,5 @@
+![Docker multilogin](https://github.com/vidoodles/dockerized-multiloginapp-x11server/assets/23020159/db73f79d-d2eb-44f2-9f6e-2f76df0592b8)
+
 # Multilogin App with X11Server
 
 This project contains a Dockerized Multilogin App with X11Server.

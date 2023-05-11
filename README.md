@@ -4,6 +4,13 @@
 
 This project contains a Dockerized Multilogin App with X11Server.
 
+you can use the image in docker using 
+```
+vidoodles/linux-multiloginapp:tag (1.1, 1.2)
+1.1 - ubuntu based
+1.2 - based on python3.8 image
+```
+
 ## Prerequisites
 
 - Docker
